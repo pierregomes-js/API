@@ -6,7 +6,21 @@ def main():
     proporcao_transport = float(input('Insira a proporção (%) de tempo alocado ao Transport: '))
     proporcao_escada = float(input('Insira a proporção (%) de tempo alocado a escada: '))
 
-    
+    def converter_tempo(minutos):
+        hora =  0
+
+        while minutos >= 60:
+            minutos -= 60
+            hora += 1
+        if hora == 0:
+            return f'{minutos} min'
+        else:
+            if minutos == 0:
+                return f'{hora} h'
+            else:
+                return f'{hora} h e {minutos} min'
+        
+            
     minutos = qtd_horas * 60
     minutos_semanais = qtd_dias * minutos
     calorias = calcular_calorias(sexo, perda_peso)
@@ -19,8 +33,8 @@ def main():
 
     print('Resultado: ')
     print(f'Quantidade de semanas para se obter o resultado: {qtd_semanas}')
-    print(f'Minutos de transport diários: {minutos_transport}')
-    print(f'Minutos de escada diários: {minutos_escada}')
+    print(f'Minutos de transport diários: {converter_tempo(minutos_transport)}')
+    print(f'Minutos de escada diários: {converter_tempo(minutos_escada)}')
 
 def calcular_calorias(sexo, perda_peso):
     if sexo == 'F':
@@ -31,6 +45,7 @@ def calcular_calorias(sexo, perda_peso):
 
 def calcular_minutos(minutos, proporcao):
     return minutos * (proporcao / 100)
+
 
 def calcular_gasto(exercicio, minutos_exercicio, sexo):
     if exercicio == 'escada':
@@ -45,6 +60,7 @@ def calcular_gasto(exercicio, minutos_exercicio, sexo):
             gasto = (minutos_exercicio / 5) * 100
     return gasto 
 
+
 def calcular_semanas(minutos_semanais, gasto_diario, calorias):
     semanas = 1
     gasto_semanal = minutos_semanais * gasto_diario
@@ -56,4 +72,3 @@ def calcular_semanas(minutos_semanais, gasto_diario, calorias):
 
 
 main()
-#separar em horas e minutos
