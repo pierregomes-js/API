@@ -5,12 +5,13 @@ def main():
     nota_mulheres = 0
     nota_homens = 0
     somatorio_nota = 0
-    somatorio_alunos = 0
+    somatorio_alunos = 1
     somatorio_homens = 0
     somatorio_mulheres = 0
     nota = 0
 
     sexo = input('Sexo (M ou F): ')
+    sexo = sexo.upper()
 
     while sexo != 'F' and sexo != 'M':
         nota = int(input('Nota (1 a 10): '))
@@ -53,16 +54,25 @@ def main():
     print(f'Total de alunos: {somatorio_alunos}.')
     print(f'Total de mulheres: {somatorio_mulheres}.')
     print(f'Total de homens: {somatorio_homens}.')
-    print(f'Desempenho total da turma: {desempenho_total}% .')
-    print(f'Desempenho dos homens: {desempenho_homens}% .')
-    print(f'Desempenho das mulheres = {desempenho_mulheres}% .')
+    print(f'Desempenho total da turma: {desempenho_total}.')
+    print(f'Desempenho dos homens: {desempenho_homens}.')
+    print(f'Desempenho das mulheres = {desempenho_mulheres}.')
 
     def calcular_perfomance(nota, somatorio):
         perfomance =  (nota / somatorio) * 100
         return f'{perfomance:.2f}'
     
     def calcular_desempenho(nota, somatorio):
-        desempenho = (nota / somatorio) * 100
-        return f'{desempenho:.2f}'
+        desempenho = (nota / somatorio) * 10
+        if desempenho <= 2:
+            return 'Péssimo'
+        elif desempenho <= 4:
+            return 'Ruim'
+        elif desempenho <= 6:
+            return 'Regular'
+        elif desempenho < 8:
+            return 'Bom'
+        else:
+            return 'Excelente'
 
 main()
