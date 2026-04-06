@@ -1,9 +1,10 @@
 def main():
+
     renda_mensal = float(input('Renda mensal: '))
     valor_emprestimo = float(input('Valor do empréstimo :'))
     prazo = float(input('Valor do prazo desejado: '))
 
-    selic = 14.75
+    selic = 0.1475
     iof = calcular_iof(valor_emprestimo, prazo)
     emprestimo_juros = valor_emprestimo + iof
     juros = calcular_juros(emprestimo_juros, selic, prazo)
@@ -11,11 +12,14 @@ def main():
     eh_valido = validar_emprestimo(renda_mensal, parcela)
 
     print('Resultado:')
-    print(f'Valor do IOF: {}.')
-    print(f'Valor dos juros a pagar: {}.')
-    print(f'Valor Total a pagar: {}.')
-    print(f'Valor da Parcela Mensal: {}.')
-    #emprestimo aprovado ou reprovado
+    print(f'Valor do IOF: {iof:.2f}.')
+    print(f'Valor dos juros a pagar: {juros:.2f}.')
+    print(f'Valor Total a pagar: {(juros + valor_emprestimo):.2f}.')
+    print(f'Valor da Parcela Mensal: {prazo:.0f}x de R${parcela:.2f}.')
+    if eh_valido:
+        print(f'Empéstimo aprovado.')
+    else:
+        print(f'Empréstimo negado.')
 
 def calcular_iof(e, p):
     valor = e * (1 - 0.038)
@@ -40,7 +44,9 @@ def validar_emprestimo(r, p):
     maximo = r * 0.30
 
     if p > maximo or p < minimo:
-        return 
+        return False
+    else:
+        return True
 
 
 
