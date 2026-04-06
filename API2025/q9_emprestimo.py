@@ -1,13 +1,14 @@
 def main():
     renda_mensal = float(input('Renda mensal: '))
-    valor_desejado = float(input('Valor do empréstimo desejado:'))
-    prazo_desejado = float(input('Valor do prazo desejado: '))
+    valor_emprestimo = float(input('Valor do empréstimo :'))
+    prazo = float(input('Valor do prazo desejado: '))
 
     selic = 14.75
-    eh_valido = validar_emprestimo(renda_mensal, valor_desejado)
-    iof = calcular_iof(valor_desejado, prazo_desejado, selic)
-    juros = calcular_juros(iof, valor)
-    montante = juros + valor_desejado
+    iof = calcular_iof(valor_emprestimo, prazo)
+    emprestimo_juros = valor_emprestimo + iof
+    juros = calcular_juros(emprestimo_juros, selic, prazo)
+    parcela = juros / prazo
+    eh_valido = validar_emprestimo(renda_mensal, parcela)
 
     print('Resultado:')
     print(f'Valor do IOF: {}.')
@@ -16,13 +17,31 @@ def main():
     print(f'Valor da Parcela Mensal: {}.')
     #emprestimo aprovado ou reprovado
 
-def validar_emprestimo(renda, valor):
-    if valor < 1518:
-        return False
-    elif valor > (renda * 0.3):
-        return False
+def calcular_iof(e, p):
+    valor = e * (1 - 0.038)
+    dia = (30 * p) * (1 - 0.00082)
+    return valor + dia
+
+def calcular_juros(v, s, p):
+    if p <= 6:
+        j = v * (s * 0.5) 
+    elif p <= 12:
+        j = v * (s * 0.75)
+    elif p <= 18:
+        j = v * s
     else:
-        return True
+        j = v * (s * 1.30)
+
+    return j
+
+
+def validar_emprestimo(r, p):
+    minimo = 1518
+    maximo = r * 0.30
+
+    if p > maximo or p < minimo:
+        return 
+
 
 
 main()

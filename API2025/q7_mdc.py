@@ -1,11 +1,13 @@
 def main():
-    
+
     def mdc(a, b):
-        resto = a
-
-        while resto > 0:
-            b = 
-
+        while b != 0:
+            resto = a % b
+            a = b
+            b = resto
+        return a
+    
+    print(mdc(24, 15))
 
 
 main()

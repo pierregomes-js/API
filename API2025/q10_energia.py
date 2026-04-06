@@ -5,7 +5,8 @@ def main():
         Consumidor = input('Nome do consumidor: ')
         consumo_kwh = float(input('Consumo de KWh: '))
 
-        consumo_rs = calcular
+        consumo_rs = calcular_consumo(consumo_kwh)
+        bandeira_tarifaria = calcular_bandeira(consumo_rs, consumo_kwh)
 
 
 
@@ -22,4 +23,15 @@ def main():
     print(f'Iluminação Pública: R$ {iluminacao}')
     print('—-----------—-----------—-----------—-----------')
     print(f'Total a Pagar: R$ {total}')
+
+def calcular_consumo(c):
+    return c * 0.89
+
+def calcular_bandeira(rs, kwh):
+    if kwh < 30:
+        return kwh * 0
+    
+
+
+
 main()

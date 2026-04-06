@@ -1,39 +1,46 @@
-def main():
-    def receber_inteiro(texto):
-        try:
+
+def receber_inteiro(texto):
+    try:
+        numero = int(input(texto))
+    except:
+        while True:
+            print('Número inválido, digite outro número.')
             numero = int(input(texto))
-        except:
-            while True:
-                print('Número inválido, digite outro número.')
-                numero = int(input(texto))
-        return numero
+    return numero
     
-    def receber_inteiro_positivo(texto):
-        numero = receber_inteiro(texto)
-        if numero < 0:
-            while numero < 0:
-                print('Número inválido.')
-                numero = receber_inteiro(texto)
-        return numero
-    
-    def receber_inteiro_min(texto):
-        numero = receber_inteiro(texto)
-        return numero
 
-    def receber_inteiro_max(texto):
-        numero = receber_inteiro(texto)
-        return numero
-    
-    
-    def receber_intervalo(texto, texto1, texto2):
-        minimo = receber_inteiro_min(texto1)
-        maximo = receber_inteiro_max(texto2)
+def receber_inteiro_positivo(texto):
+    numero = receber_inteiro(texto)
 
+    while numero < 0:
+        print('Número inválido.')
         numero = receber_inteiro(texto)
-        if numero < minimo or numero > maximo:
-            print('Número inválido.')
-            numero = receber_inteiro(texto)
-        return
+
+    return numero
+    
+
+def receber_inteiro_min(texto, minimo):
+    numero = receber_inteiro(texto)
+    while numero < minimo:
+        print(f'Número inválido, digite no mínimo {minimo}.')
+        numero = receber_inteiro(texto)
+
+    return numero
 
 
-main()
+def receber_inteiro_max(texto, maximo):
+    numero = receber_inteiro(texto)
+    while numero > maximo:
+        print(f'Número inválido, digite no máximo {maximo}.')
+        numero = receber_inteiro(texto)
+
+    return numero
+    
+    
+def receber_intervalo(texto, minimo, maximo):
+    numero = receber_inteiro(texto)
+
+    while (numero < minimo or numero > maximo):
+        print(f'Número inválido, digite no mínimo {minimo} e no máximo {maximo}.')
+        numero = receber_inteiro(texto)
+    return numero

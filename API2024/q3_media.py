@@ -33,6 +33,23 @@ def main():
 
         sexo = input('Sexo (M ou F): ')
 
+    def calcular_perfomance(nota, somatorio):
+        perfomance =  (nota / somatorio) * 100
+        return f'{perfomance:.2f}'
+    
+    def calcular_desempenho(nota, somatorio):
+        desempenho = (nota / somatorio) * 10
+        if desempenho <= 2:
+            return 'Péssimo'
+        elif desempenho <= 4:
+            return 'Ruim'
+        elif desempenho <= 6:
+            return 'Regular'
+        elif desempenho < 8:
+            return 'Bom'
+        else:
+            return 'Excelente'
+        
     media_nota = somatorio_nota / somatorio_alunos
 
     porcent_homens = calcular_perfomance(nota_homens, somatorio_homens)
@@ -58,21 +75,21 @@ def main():
     print(f'Desempenho dos homens: {desempenho_homens}.')
     print(f'Desempenho das mulheres = {desempenho_mulheres}.')
 
-    def calcular_perfomance(nota, somatorio):
-        perfomance =  (nota / somatorio) * 100
-        return f'{perfomance:.2f}'
+    # def calcular_perfomance(nota, somatorio):
+    #     perfomance =  (nota / somatorio) * 100
+    #     return f'{perfomance:.2f}'
     
-    def calcular_desempenho(nota, somatorio):
-        desempenho = (nota / somatorio) * 10
-        if desempenho <= 2:
-            return 'Péssimo'
-        elif desempenho <= 4:
-            return 'Ruim'
-        elif desempenho <= 6:
-            return 'Regular'
-        elif desempenho < 8:
-            return 'Bom'
-        else:
-            return 'Excelente'
+    # def calcular_desempenho(nota, somatorio):
+    #     desempenho = (nota / somatorio) * 10
+    #     if desempenho <= 2:
+    #         return 'Péssimo'
+    #     elif desempenho <= 4:
+    #         return 'Ruim'
+    #     elif desempenho <= 6:
+    #         return 'Regular'
+    #     elif desempenho < 8:
+    #         return 'Bom'
+    #     else:
+    #         return 'Excelente'
 
 main()
