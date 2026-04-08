@@ -1,7 +1,7 @@
 def main():
     nome_cliente = ''
     maior = 0
-    menor = None
+    menor = 1000000000
 
     quant_compras = 0
     contador = 0
@@ -9,22 +9,24 @@ def main():
     compra_s_cash = 0
     somatorio_compras = 0
     n = int(input('Quantidade de clientes: '))
+    inicio = 0
 
     def calcular_cashback(valor_compra):
         if valor_compra < 250:
-            cashback = valor_compra * 0.05
+            cashback = valor_compra * 0.95
         elif valor_compra < 500:
-            cashback = ((valor_compra - 250) * 0.07) + (valor_compra)
+            cashback = valor_compra * 0.93
         elif valor_compra < 750:
             cashback = valor_compra * 0.92
         else:
-            # valor_acumulado = (valor_compra * 0.95)
+            cashback = (250 * 0.95) + (250 * 0.93) + (250 * 0.92) + ((valor_compra - 750) * 0.75)
+
         
         return cashback
 
 
-    while n > 0:
-        n -= 1
+    while inicio < n:
+        inicio += 1
         nome_cliente = input('Nome do cliente: ')
         quant_compras = int(input(f'Quantidade de compras do cliente {nome_cliente} : '))
 
@@ -43,13 +45,12 @@ def main():
             contador += 1
             
 
-    cash = somatorio_compras - compra_s_cash
-    investimento = (cash * somatorio_compras) * 100
+    cash = compra_s_cash - somatorio_compras
+    investimento = (cash / compra_s_cash) * 100
 
     valor_medio = somatorio_compras / n
 
     print(f'Faturamento: {somatorio_compras:.2f} R$.')
-    # print(f'Distribuição em cashback: ')
     print(f'Valor em R$ de investimento: {cash:.2f} R$.')
     print(f'Valor em % de investimento: {investimento:.2f} %')
     print(f'Maior valor pago em cashback: {maior} R$.')
