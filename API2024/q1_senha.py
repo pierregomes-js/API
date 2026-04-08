@@ -1,25 +1,40 @@
 def main():
     digitos = int(input('Quantidade de digitos da senha: '))
-    satisfeito = 'não'
+    satisfeito = 'N'
+    semente = 42
 
-    while satisfeito == 'não':
 
-def gerador_senhas(digitos):
-    n = 0
-    digito_atual = 1
-    digito_antigo = 3
-    eh_igual = (digito_atual == digito_antigo)
-    while eh_igual:
-        digito_atual += 1
-        
-    eh_sucessor = (digito_atual + 1 == digito_antigo)
-    eh_antecessor = (digito_atual == digito_antigo + 1)
+    while satisfeito == 'N':
+
+        senha = gerador_senhas(digitos, semente)
+
+        print(f'Senha: {senha}')
+        satisfeito = input('Satisfeito? (S/N): ')
+        semente = (semente * 997 + 12345) % 1000000
+
+
+
+def gerador_senhas(digitos, semente):
     senha = ''
+    n = 0
+    ultimo_digito = 0
+    base = semente
 
     while n <= digitos:
-        if 
-        senha = str(digito) + senha
-        n += 1
+        base = (base * 1103515245 + 12345) % (2**31)
+        digito = (base // 65536) % 10
+
+        eh_igual = (ultimo_digito == digito)
+        eh_ant = (ultimo_digito - 1 == digito)
+        eh_suc = (ultimo_digito + 1 == digito)
+
+        if not (eh_igual or eh_ant or eh_suc):
+            senha = senha + str(digito)
+            ultimo_digito = digito
+            n += 1
+
+    return senha
+        
         
 
 main()
