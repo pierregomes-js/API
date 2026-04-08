@@ -1,57 +1,44 @@
 def main():
-    consumidor = ''
-    consumo_kwh = 0
-    valor_cem = 0
-    bandeira = 0
-    n_familias = int(input('Número de famílias:' ))
 
-    while n_familias > 0:
-        consumidor = input('Nome do consumidor: ')
-        consumo_kwh = float(input('Consumo de KWh: '))
-        valor_cem = 8
-
-        consumo_rs = calcular_consumo(consumo_kwh, valor_cem)
-        bandeira_tarifaria = calcular_bandeira(bandeira, consumo_rs, valor_cem)
-        s_imposto = consumo_rs + bandeira_tarifaria
-        iluminacao = calc_tarifa(consumo_kwh, consumo_rs)
-        icms = calc_icms(consumo_rs)
-        cofins = calc_cofins(consumo_rs)
-
-        total = s_imposto + iluminacao + icms + cofins
+    leitura_atual = int(input('Leitura atual: '))
+    leitura_anterior = int(input('Leitura anterior: '))
 
 
-    
+    consumo = leitura_atual - leitura_anterior
+    consumo_rs = calcular_consumo(consumo)
+    bandeira = calcular_bandeira(consumo_rs)
+    cofins = calc_cofins(consumo_rs)
+    icms = calc_icms(consumo_rs)
+    iluminacao = calc_tarifa(consumo, consumo_rs)
+    total = consumo_rs + bandeira + cofins + icms + iluminacao
 
 
 
-        print('****** TALÃO MENSAL XPTO ********')
-        print(f'Consumidor: {consumidor}')
-        print(f'Consumo (KWh): {consumo_kwh}')
-        print(f'Consumo (R$): R$ {consumo_rs:.2f} (valor por KWh: R$ {valor_um:.2f})')
-        print(f'Bandeira Tarifária: R$ {bandeira_tarifaria:.2f} (valor por 100KWh: R$ {valor_cem:.2f})')
-        print(f'Total sem Impostos: R$ {s_imposto:.2f}')
-        print(f'ICMS: R$ {icms:.2f}')
-        print(f'PIS/COFINS: R$ {cofins:.2f}')
-        print(f'Iluminação Pública: R$ {iluminacao:.2f}')
-        print('—-----------—-----------—-----------—-----------')
-        print(f'Total a Pagar: R$ {total:.2f}')
+    print('Total: ')
+    print(f'Consumo em KWh: {consumo} KWh.')
+    print(f'Valor faturado: {consumo_rs:.2f} R$.')
+    print(f'Bandeira: {bandeira:.2f} R$. (Valor por 100KWh: 8,00 R$).')
+    print(f'ICMS: {icms:.2f} R$.')
+    print(f'PIS/COFINS: {cofins:.2f} R$')
+    print(f'Taxa de iluminação: {iluminacao:.2f} R$.')
+    print(f'Total: {total:.2f} R$')
 
-        n_familias -= 1
 
-def calcular_consumo(c, v):
+
+
+def calcular_consumo(c):
     if c < 30:
         kwh = 0
     elif c < 100:
-        kwh = (c * 0.59) * v
+        kwh = (c * 0.59)
     else:
-        kwh = (c * 0.75) * v
+        kwh = (c * 0.75)
 
     return kwh
         
 
-def calcular_bandeira(b, kwh, cem):
-    valor_cem = kwh * cem
-    return valor_cem * b
+def calcular_bandeira(rs):
+    return (rs / 100) * 8
 
 
 def calc_tarifa(c, r):
